@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Department>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>All Department</h1>
+<br />
+<br />
+<a asp-action="Create" asp-controller="Department" class="btn btn-primary">Create New Department</a>
+
+@if (Model.Any())
+{
+    <table class="table table-striped mt-3 table-hover">
+        <thead>
+            <tr>
+                <td>@Html.DisplayNameFor(D => D.Code)</td>
+                <td>@Html.DisplayNameFor(D => D.Name)</td>
+                <td>@Html.DisplayNameFor(D => D.DateOfCreation)</td>
+                <td>Details</td>
+                <td>Update</td>
+                <td>Delete</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var Department in Model)
+            {
+                <tr>
+                    <td>@Department.Code</td>
+                    <td>@Department.Name</td>
+                    <td>@Department.DateOfCreation.ToString("MM/dd/yyyy")</td>
+                    <partial name="_ButtonPartialView" model="@Department.Id.ToString()">
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="mt-4 alert alert-warning">
+        <h3>There is no Departments</h3>
+    </div>
+}
+
+
+@* <td>
+    <a asp-action="Details" asp-controller="Department" asp-route-id="@Department.Id" class="btn btn-success">
+        <i class="fas fa-eye"></i> Details</a>
+</td> *@
